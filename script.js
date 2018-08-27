@@ -96,8 +96,7 @@ function addRow() {
 //Функция удаление строк
 
 function delRow() {
-  for (var i = 0; i < 1; i++) {
-    
+  for (var i = 0; i < 1; i++) {    
     table.deleteRow(-1);
   }
   oneRow();
@@ -127,8 +126,7 @@ var tableColumns = document.querySelectorAll('tr');
     tableColumns[i].deleteCell(-1);
   }
   moveCollumnsAddBtn();
-  oneColumn();
-  
+  oneColumn();  
 }
 
 //Проверка количества строк
@@ -185,10 +183,7 @@ function cellsEventListner() {
   var tableCells = document.querySelectorAll('td');
   for( var i = 0; i < tableCells.length; i++){
     tableCells[i].addEventListener('mousemove', moveDelBtns);    
-  }
-
-  oneRow();
-  oneColumn();
+  }  
 
   function moveDelBtns() {  
     var wrapper = document.querySelector('.wrapper').getBoundingClientRect();
@@ -197,9 +192,9 @@ function cellsEventListner() {
    
     btnTop.style = `left: ${cellsCoord.left - wrapper.left}px;`;  
     btnLeft.style = `top: ${cellsCoord.top - wrapper.top}px;`;
-  }
-  
-  
+  } 
+  oneRow();
+  oneColumn();
 }
 
 table.addEventListener('mouseover', btnsDelVisible);     //Появление кнопок удаления при наведении курсора на таблицу
