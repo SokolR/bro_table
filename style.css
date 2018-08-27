@@ -6,8 +6,9 @@
 }
 
 .wrapper {
-  margin: 100px 0 0 500px;
   position: relative;
+   top: 100px;
+   left: 100px;
 }
 
 .wrapper-table table {
@@ -35,7 +36,7 @@
 
 .btn__top {
   position: absolute;
-  top: -51px;
+  top: -50px;
   left: 2px;
 }
 
@@ -66,7 +67,7 @@
 .btn__left {
   position: absolute;
   top: 2px;
-  left: -51px
+  left: -50px
 }
 
 .btn__left:hover {

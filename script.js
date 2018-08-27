@@ -1,16 +1,12 @@
-//Динамическое создание елементов
+////Динамическое создание елементов
 
-var ELEMENT_FOR_INSERT = ".wrapper";
+//Выбор элемента для вставки
 
-var element = document.querySelector(ELEMENT_FOR_INSERT);
+var element = document.querySelector('.wrapper');
 
 //Создание кнопок
 
 function createButtons() {
-  //var btnWrapper = document.createElement('div');
-  //btnWrapper.classList.add('wrapper-buttons');
-  //btnWrapper.classList.add('btn');
-
   var btnRight = document.createElement('button');
   btnRight.classList.add('btn');
   btnRight.classList.add('btn__right');
@@ -42,9 +38,8 @@ function createButtons() {
   btnLeft.classList.add('btn__delete');  
   btnLeft.classList.add('disabled');
   btnLeft.innerText = '-';
-  element.appendChild(btnLeft);  
-     
-  //element.appendChild(btnWrapper);
+
+  element.appendChild(btnLeft);       
 }
 createButtons();
 
@@ -71,13 +66,14 @@ function createTable(element, rows, columns) {
 
 createTable(element, 4, 4);
 
-//Редактирование таблици
+////Редактирование таблици
+
+//Переменные
 
 var btnRight = document.querySelector('.btn__right');
 var btnBot = document.querySelector('.btn__bottom');
 var btnTop = document.querySelector('.btn__top');
 var btnLeft = document.querySelector('.btn__left');
-
 var table = document.querySelector('table');
 
 //Функция добавление строк
@@ -140,10 +136,7 @@ var tableColumns = document.querySelectorAll('tr');
 function oneRow() {
   if (table.rows.length < 2) {
     btnLeft.style = 'display: none';
-  }  
-  else {
-    btnLeft.removeAttribute("style")
-  }
+  }    
 }
 
 //Проверка количества столбцов
@@ -153,39 +146,20 @@ function oneColumn() {
 
   if (oneColumn.cells.length < 2) {
      btnTop.style = 'display: none';
-  } 
-  else {
-    btnTop.removeAttribute("style")
-  } 
+  }   
 }
 
 //Отобразить кнопки удаления
 
 function btnsDelVisible() {
-  leftBtnVisible();
-  topBtnVisible();
+  btnLeft.classList.remove('disabled');
+  btnTop.classList.remove('disabled');
 }
 
 //Скрыть кнопки удаления
 
 function btnsDelHide() {
-  leftBtnHide();
-  topBtnHide();
-}
-
-function leftBtnVisible() {
-  btnLeft.classList.remove('disabled');
-}
-
-function leftBtnHide() {
   btnLeft.classList.add('disabled');
-}
-
-function topBtnVisible() {
-  btnTop.classList.remove('disabled');
-}
-
-function topBtnHide() {
   btnTop.classList.add('disabled');
 }
 
@@ -194,7 +168,7 @@ function topBtnHide() {
 function moveRowsAddBtn() {
   var coordinate = table.getBoundingClientRect();
   
-  btnBot.style.top = `${coordinate.height}px`;
+  btnBot.style = `top: ${coordinate.height}px`;
 }
 
 //Смещение кнопки при добавлении колонки
@@ -202,13 +176,37 @@ function moveRowsAddBtn() {
 function moveCollumnsAddBtn() {
   var coordinate = table.getBoundingClientRect();
   
-  btnRight.style.left = `${coordinate.width}px`;
+  btnRight.style = `left: ${coordinate.width}px`;
 }
 
+//Смещение кнопок удаления
+
+function cellsEventListner() {
+  var tableCells = document.querySelectorAll('td');
+  for( var i = 0; i < tableCells.length; i++){
+    tableCells[i].addEventListener('mousemove', moveDelBtns);    
+  }
+
+  oneRow();
+  oneColumn();
+
+  function moveDelBtns() {  
+    var wrapper = document.querySelector('.wrapper').getBoundingClientRect();
+    var cellsCoord = this.getBoundingClientRect();
+    table.getBoundingClientRect();
+   
+    btnTop.style = `left: ${cellsCoord.left - wrapper.left}px;`;  
+    btnLeft.style = `top: ${cellsCoord.top - wrapper.top}px;`;
+  }
+  
+  
+}
 
 table.addEventListener('mouseover', btnsDelVisible);     //Появление кнопок удаления при наведении курсора на таблицу
 
 table.addEventListener('mouseout', btnsDelHide);     //Пропадание кнопок удаления при отведении курсора с таблици
+
+table.addEventListener('mousemove', cellsEventListner);     //Перемещение кнопок удаления
 
 btnBot.addEventListener('click', addRow);     //Добавление строки по клику на кнопку
 
@@ -216,19 +214,19 @@ btnRight.addEventListener('click', addColumn);      //Добавление ко�
 
 btnLeft.addEventListener('click', delRow);     //Удаление строки по клику на кнопку
 
-btnLeft.addEventListener('mouseover', leftBtnVisible);     //Появление кнопки при наведении курсора на кнопку
+btnLeft.addEventListener('mouseover', btnsDelVisible);     //Появление кнопок при наведении курсора на кнопку
 
-btnLeft.addEventListener('mouseout', leftBtnHide);     //Пропадание кнопки при отведении курсора с конпки
+btnLeft.addEventListener('mouseout', btnsDelHide);     //Пропадание кнопок при отведении курсора с конпки
 
-btnLeft.addEventListener('click', leftBtnHide);     //Пропадание кнопки при клике по ней
-
-btnTop.addEventListener('click', delColumn);     //Удаление колонки по клику на кнопку
+btnLeft.addEventListener('click', btnsDelHide);     //Пропадание кнопок при клике по ней
 
 btnTop.addEventListener('click', delColumn);     //Удаление колонки по клику на кнопку
 
-btnTop.addEventListener('mouseover', topBtnVisible);     //Появление кнопки при наведении курсора на кнопку
+btnTop.addEventListener('click', delColumn);     //Удаление колонки по клику на кнопку
 
-btnTop.addEventListener('mouseout', topBtnHide);     //Пропадание кнопки при отведении курсора с конпки
+btnTop.addEventListener('mouseover', btnsDelVisible);     //Появление кнопок при наведении курсора на кнопку
 
-btnTop.addEventListener('click', topBtnHide);     //Пропадание кнопки при клике по ней
+btnTop.addEventListener('mouseout', btnsDelHide);     //Пропадание кнопок при отведении курсора с конпки
+
+btnTop.addEventListener('click', btnsDelHide);     //Пропадание кнопок при клике по ней
 
