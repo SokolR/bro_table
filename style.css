@@ -1,64 +1,84 @@
+:root {
+  --table-color: #48AAE6;
+  --btn-add-color: #F3A500;
+  --btn-del-color: #B20000;
+  --text-color: #FFFFFF;
+}
+
 .wrapper {
   margin: 100px 0 0 500px;
   position: relative;
-
 }
+
 .wrapper-table table {
-  border: 1px solid #3498DB;
+  border: 1px solid var(--table-color);
   min-width: 50px;
 }
+
 .wrapper-table td {
-  margin: 1px;
   width: 50px;
   height: 50px;
-  background-color: #3498DB;
+  background-color: var(--table-color);
 }
+
 .btn {
   width: 50px;
   height: 50px;
-  margin: 1px;
   display:block;
-  position: absolute;
-  color: #eee;
+  color: var(--text-color);
   font-size: 24px;
   font-weight: 900;
   cursor: pointer;
   opacity: 1;
-  transition: all 0.5s;
+  transition: opacity 0.5s;
 }
-.btn:hover {
-  opacity: 0.7;
-  display: block;
-}
+
 .btn__top {
   position: absolute;
-  top: -52px;
+  top: -51px;
   left: 2px;
 }
+
+.btn__top:hover {
+  opacity: 0.7;
+}
+
 .btn__right {
   position: absolute;
   top: 2px;
-  left: 218px;
+  left: 220px;
 }
+
+.btn__right:hover {
+  opacity: 0.7;
+}
+
 .btn__bottom {
   position: absolute;
-  top: 218px;
-  left: 1px;
+  top: 220px;
+  left: 2px;
 }
+
+.btn__bottom:hover {
+  opacity: 0.7;
+}
+
 .btn__left {
   position: absolute;
   top: 2px;
-  left: -52px
+  left: -51px
+}
+
+.btn__left:hover {
+  opacity: 0.7;
 }
 
 .btn__add {
-  border: none;
-  background-color: #F39C12;
+  background-color: var(--btn-add-color);
 }
 
 .btn__delete {
-  background-color: #f44336;
-  border: none;
+  background-color: var(--btn-del-color);
 }
 
 .disabled {
