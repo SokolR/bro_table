@@ -1,5 +1,5 @@
 .wrapper {
-  margin: 50px auto;
+  margin: 100px 0 0 500px;
   position: relative;
 
 }
@@ -31,23 +31,24 @@
   display: block;
 }
 .btn__top {
-  position: relative;
-  top: 150px;
-  left: 1px;
+  position: absolute;
+  top: -52px;
+  left: 2px;
 }
 .btn__right {
-  position: relative;
-  top: 157px;
-  right: 52px;
+  position: absolute;
+  top: 2px;
+  left: 218px;
 }
 .btn__bottom {
-  position: relative;
-  top: 225px;
+  position: absolute;
+  top: 218px;
   left: 1px;
 }
 .btn__left {
-  top: 1px;
-  left: 52px
+  position: absolute;
+  top: 2px;
+  left: -52px
 }
 
 .btn__add {
