@@ -1,8 +1,12 @@
+tableInsert('.wrapper');
+
+function tableInsert(elementForInsert){
+
 ////Динамическое создание елементов
 
 //Выбор элемента для вставки
 
-var element = document.querySelector('.wrapper');
+var element = document.querySelector(elementForInsert);
 
 //Создание кнопок
 
@@ -224,4 +228,6 @@ btnTop.addEventListener('mouseover', btnsDelVisible);     //Появление �
 btnTop.addEventListener('mouseout', btnsDelHide);     //Пропадание кнопок при отведении курсора с конпки
 
 btnTop.addEventListener('click', btnsDelHide);     //Пропадание кнопок при клике по ней
+}
+
 
