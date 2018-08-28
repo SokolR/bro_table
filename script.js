@@ -221,8 +221,6 @@ btnLeft.addEventListener('click', btnsDelHide);     //Пропадание кн�
 
 btnTop.addEventListener('click', delColumn);     //Удаление колонки по клику на кнопку
 
-btnTop.addEventListener('click', delColumn);     //Удаление колонки по клику на кнопку
-
 btnTop.addEventListener('mouseover', btnsDelVisible);     //Появление кнопок при наведении курсора на кнопку
 
 btnTop.addEventListener('mouseout', btnsDelHide);     //Пропадание кнопок при отведении курсора с конпки
