@@ -42,8 +42,8 @@ export default class DynamicTable {
 
     this.createBtns(this.btnRight, 'btn__right', '+', () => this.addColumn());
     this.createBtns(this.btnBot, 'btn__bottom', '+', () => this.addRow());
-    this.createBtns(this.btnTop, 'btn__top', '-', () => this.delColumn(event));
-    this.createBtns(this.btnLeft, 'btn__left', '-', () => this.delRow(event));  
+    this.createBtns(this.btnTop, 'btn__top', '-', () => this.delColumn());
+    this.createBtns(this.btnLeft, 'btn__left', '-', () => this.delRow());  
   } 
 
   addRow() {
