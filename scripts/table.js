@@ -9,6 +9,9 @@ export default class DynamicTable {
     this.btnBot = document.createElement('button');
     this.btnTop = document.createElement('button');
     this.btnLeft = document.createElement('button');
+
+    this.rowIndex;
+    this.columnIndex;
   } 
 
 
@@ -35,12 +38,12 @@ export default class DynamicTable {
 
     this.table.addEventListener("mouseover", () => this.btnsDelVisible());
     this.table.addEventListener("mouseout", () => this.btnsDelHide());
-    this.table.addEventListener("mousemove", (e) => this.delBtnsMove(e));
+    this.table.addEventListener("mousemove", () => this.delBtnsMove(event));
 
     this.createBtns(this.btnRight, 'btn__right', '+', () => this.addColumn());
     this.createBtns(this.btnBot, 'btn__bottom', '+', () => this.addRow());
-    this.createBtns(this.btnTop, 'btn__top', '-', () => this.delColumn());
-    this.createBtns(this.btnLeft, 'btn__left', '-', () => this.delRow());  
+    this.createBtns(this.btnTop, 'btn__top', '-', () => this.delColumn(event));
+    this.createBtns(this.btnLeft, 'btn__left', '-', () => this.delRow(event));  
   } 
 
   addRow() {
@@ -50,6 +53,7 @@ export default class DynamicTable {
     for (let i = 0; i < rowLength; i++) {
       addNewRow.insertCell(i);
     }
+    this.oneRow()
   }
 
   addColumn() {
@@ -58,14 +62,17 @@ export default class DynamicTable {
     for (let i = 0; i < columnLength.length; i++) {
       columnLength[i].insertCell();
     }
+    this.oneColumn()
   }
 
-  delBtnsMove(e) {
-    let targetElement = e.target;
+  delBtnsMove(event) {
+    let targetElement = event.target;
     let targetName = targetElement.nodeName;
     let left = targetElement.offsetLeft;
     let top = targetElement.offsetTop;
-    let targetIndex = targetElement.parentElement.rowIndex;
+
+    this.rowIndex = targetElement.parentElement.rowIndex;
+    this.columnIndex = targetElement.cellIndex;
 
     if (targetName === 'TD') {
       this.btnTop.style.left = left + 'px';
@@ -74,16 +81,18 @@ export default class DynamicTable {
   }
 
   delRow() {      
-    console.log(this.tar); 
-    this.table.querySelectorAll('tr')[this.targetRowIndex].remove();
-
+    this.table.deleteRow(this.rowIndex);    
+    
     this.oneRow();
   }
 
-  delColumn() {
-    this.table.querySelectorAll('tr').forEach((tr) => {
-      tr.querySelectorAll('td')[this.rIndex].remove();
-    });
+  delColumn() {     
+    let column = this.table.rows;
+
+    for (let i = 0; i < column.length; i++) {      
+      column[i].deleteCell(this.columnIndex);        
+    }
+
     this.oneColumn();  
   }  
 
